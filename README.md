@@ -4,7 +4,7 @@ Página de inscrição e pagamento via Pix do curso **IMPACT · Gestão Intelige
 
 ## O que a página faz
 
-1. A cliente preenche nome completo, CPF, data de nascimento, celular com WhatsApp e endereço. O CPF é conferido pelos dígitos verificadores.
+1. A cliente preenche nome completo, CPF, data de nascimento, celular com WhatsApp, e-mail e endereço. O CPF é conferido pelos dígitos verificadores.
 2. Ela paga R$ 197,70 pelo QR Code, pelo Pix copia e cola ou pela chave aleatória.
 3. Ao concluir, o botão abre o WhatsApp com o cadastro já escrito, endereçado a (27) 99981-6314, e ela anexa o comprovante.
 

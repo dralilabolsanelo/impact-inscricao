@@ -102,6 +102,8 @@ ol.passos{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;
           <input id="nasc" name="nasc" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" autocomplete="bday" required><span class="msg" id="nasc-msg"></span></div>
         <div class="campo c6"><label for="cel">Celular com WhatsApp</label>
           <input id="cel" name="cel" inputmode="tel" placeholder="(27) 99999-9999" maxlength="15" autocomplete="tel-national" required><span class="msg" id="cel-msg"></span></div>
+        <div class="campo c6"><label for="email">E-mail</label>
+          <input id="email" name="email" type="email" inputmode="email" placeholder="voce@email.com" autocomplete="email" required><span class="msg" id="email-msg"></span></div>
       </div>
 
       <div class="etapa" style="margin-top:12px"><h2 id="t1b" style="font-size:22px">Endereço</h2></div>
@@ -205,6 +207,7 @@ ol.passos{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;
     cpf: function(v){ return cpfValido(v) ? '' : 'Confira o CPF: os números não formam um CPF válido.'; },
     nasc: function(v){ return dataValida(v) ? '' : 'Use o formato dd/mm/aaaa, com uma data real.'; },
     cel: function(v){ return digits(v).length===11 ? '' : 'Informe DDD e número, com 11 dígitos.'; },
+    email: function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Confira o e-mail: ele precisa ter @ e um domínio, como voce@email.com.'; },
     cep: function(v){ return digits(v).length===8 ? '' : 'O CEP tem 8 dígitos.'; },
     rua: function(v){ return v.trim() ? '' : 'Informe a rua.'; },
     num: function(v){ return v.trim() ? '' : 'Informe o número (ou "s/n").'; },
@@ -234,14 +237,14 @@ ol.passos{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;
     var v = function(k){ return $(k).value.trim(); };
     var end = v('rua')+', '+v('num')+(v('comp')?' – '+v('comp'):'')+' – '+v('bairro')+', '+v('cidade')+'/'+v('uf')+' – CEP '+v('cep');
     cadastro = 'Olá, Dra. Lila! Fiz o Pix de R$ 197,70 para o curso IMPACT · Gestão Inteligente.\n\n'+
-      'Nome: '+v('nome')+'\nCPF: '+v('cpf')+'\nNascimento: '+v('nasc')+'\nEndereço: '+end+'\nWhatsApp: '+v('cel')+
+      'Nome: '+v('nome')+'\nCPF: '+v('cpf')+'\nNascimento: '+v('nasc')+'\nEndereço: '+end+'\nWhatsApp: '+v('cel')+'\nE-mail: '+v('email')+
       '\n\nVou enviar o comprovante em seguida.';
     $('whats').href = 'https://wa.me/5527999816314?text='+encodeURIComponent(cadastro);
     $('form').hidden = true; $('fim').hidden = false;
     $('fim').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'});
   });
 
-  ['nome','cpf','nasc','cel','cep','rua','num','bairro','cidade','uf'].forEach(function(k){
+  ['nome','cpf','nasc','cel','email','cep','rua','num','bairro','cidade','uf'].forEach(function(k){
     $(k).addEventListener('blur', function(){ if(!$(k).value) return; var e=regras[k]($(k).value); $(k+'-msg').textContent=e; $(k).setAttribute('aria-invalid', e?'true':'false'); });
   });
 
